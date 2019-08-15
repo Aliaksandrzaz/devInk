@@ -1,1 +1,99 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Red+Hat+Display&display=swap');
+
+body{
+  margin: 0;
+  font-family: 'Red Hat Display', sans-serif;
+  background: #F7F6F4;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  background: #0081EB;
+  height: 100px;
+  align-items: center;
+  font-size: 24px;
+}
+
+.logo {
+  margin-left: 30px;
+  flex-basis: 50%;
+}
+
+.header__login{
+  display: flex;
+  flex-basis: 50%;
+  justify-content: flex-end;
+  align-items: center;
+  justify-self: self-end;
+
+  div{
+    margin-right: 30px;
+  }
+}
+
+//.sign-up {
+//  flex-basis: 20%;
+//}
+//
+//.log-in {
+//  flex-basis: 20%;
+//}
+
+.container-form {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 100%;
+  z-index: -1;
+
+}
+
+.form {
+  border: 2px solid red;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  max-width: 400px;
+  height: 45%;
+  align-items: center;
+  justify-content: space-evenly;
+
+}
+
+.form__input {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+}
+
+.form {
+
+  input {
+    height: 30px;
+    border-radius: 5px;
+  }
+  .foto{
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+  }
+  span {
+    border: 1px solid green;
+  }
+
+  .close-form{
+
+  }
+}
