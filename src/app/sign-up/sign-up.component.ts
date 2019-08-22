@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthorizationService} from '../authorization.service';
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-sign-up',
@@ -7,19 +8,45 @@ import {AuthorizationService} from '../authorization.service';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
+
   emailSignUp: string = '';
   passwordSignUp: string = '';
 
   constructor(private authorizationService: AuthorizationService) {
   }
 
-  ngOnInit() {
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
 
+  passwordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(4),
+  ]);
+
+  ngOnInit() {  }
+
+  @Output() onChanged = new EventEmitter<boolean>();
+
+  closeForm() {
+    this.onChanged.emit(false);
   }
 
-  registration(emailSignUp, passwordSignUp) {
-    console.log(emailSignUp, passwordSignUp);
+  registrationLogin(emailSignUp, passwordSignUp) {
     this.authorizationService.registration(emailSignUp, passwordSignUp);
+  }
+
+  registrationFacebook(): void {
+    this.authorizationService.facebookAuthorization();
+  }
+
+  registrationGoogle(): void {
+    this.authorizationService.googleAuthorization();
+  }
+
+  registrationGitHub(): void {
+    this.authorizationService.gitHubAuthorization();
   }
 
 }

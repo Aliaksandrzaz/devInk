@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgModule, OnInit, Output, EventEmitter} from '@angular/core';
 import {AuthorizationService} from '../authorization.service';
-import {Observable} from 'rxjs';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-log-in',
@@ -9,23 +9,48 @@ import {Observable} from 'rxjs';
 
 })
 export class LogInComponent implements OnInit {
-
-  emailLogin: string = 'abc@mail.ru';
+  emailLogin: string = 'abcabc@mail.ru';
   passwordLogin: string = 'abcabc';
 
-  constructor(private authorizationService: AuthorizationService) {
+  constructor(private authorizationService: AuthorizationService) {  }
 
-  }
+  @Output() onChanged = new EventEmitter<boolean>();
 
   ngOnInit() {
+    this.emailLogin = this.authorizationService.user.signUp;
   }
 
-  login(emailLogin, passwordLogin) {
-    this.authorizationService.login(emailLogin, passwordLogin);
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+
+  passwordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(4),
+  ]);
+
+
+  closeForm() {
+    this.onChanged.emit(false);
   }
 
-  googleStart() {
-    this.authorizationService.googleAuto();
+  login(emailLogin, passwordLogin): void {
+    if (this.emailFormControl.status === 'VALID' && this.passwordFormControl.status === 'VALID') {
+      this.authorizationService.loginAuthorization(emailLogin, passwordLogin);
+    }
+  }
+
+  googleStart(): void {
+    this.authorizationService.googleAuthorization();
+  }
+
+  gitHubStart(): void {
+    this.authorizationService.gitHubAuthorization();
+  }
+
+  facebookStart(): void {
+    this.authorizationService.facebookAuthorization();
   }
 
 }

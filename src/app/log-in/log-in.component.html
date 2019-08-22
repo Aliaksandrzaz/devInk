@@ -1,22 +1,41 @@
-<div class="container-form">
+<form class="container-form">
   <div class="log-in form">
     <div class="close-form">
-      <span>X</span>
+      <button type="button" mat-raised-button color="primary" (click)="closeForm()">X</button>
     </div>
-    <div class="foto"></div>
+
     <div>Log in</div>
+
+    <mat-form-field class="form__input">
+      <input matInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="emailLogin" [value]="emailLogin" >
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form__input">
+      <input matInput placeholder="Password" [formControl]="passwordFormControl" [(ngModel)]="passwordLogin" [value]="passwordLogin">
+      <mat-error *ngIf="passwordFormControl.hasError('minlength') && !passwordFormControl.hasError('required')">
+        Password must be more than 3 characters
+      </mat-error>
+      <mat-error *ngIf="passwordFormControl.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
     <div class="form__input">
-      <span>USER: </span><input [(ngModel)]="emailLogin" type="text">
-    </div>
-    <div class="form__input">
-      <span>PASSWORD: </span><input [(ngModel)]="passwordLogin" type="text">
-    </div>
-    <div class="form__input">
-      <span><img src="https://img.icons8.com/color/48/000000/facebook.png"></span>
+      <span (click)="facebookStart()"><img src="https://img.icons8.com/color/48/000000/facebook.png"></span>
       <span (click)="googleStart()"><img src="https://img.icons8.com/color/48/000000/google-logo.png"></span>
-      <span><img src="https://img.icons8.com/material/48/000000/github.png"></span>
+      <span (click)="gitHubStart()"><img src="https://img.icons8.com/material/48/000000/github.png"></span>
     </div>
-    <button (click)="login(emailLogin, passwordLogin)">Log-in</button>
+
+    <button type="submit" mat-raised-button color="primary" (click)="login(emailLogin, passwordLogin)"  >
+      Log In</button>
+
   </div>
 
-</div>
+</form>
+

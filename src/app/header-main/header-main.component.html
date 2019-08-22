@@ -1,0 +1,10 @@
+<div class="header">
+  <div class="logo">LOGO</div>
+  <div class="header__login">
+    <div class="sign-up" (click)="showSignUp()">SIGN UP</div>
+    <div class="log-in" (click)="showLogIn()">LOGIN</div>
+  </div>
+</div>
+
+<app-log-in  *ngIf="logIn" (onChanged)="onChanged($event)"></app-log-in>
+<app-sign-up *ngIf="signUp" (onChanged)="onChanged($event)"></app-sign-up>
